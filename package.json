@@ -1,0 +1,24 @@
+{
+  "name": "@tonalmathew/pressed",
+  "version": "0.0.1",
+  "description": "display pressed keys",
+  "main": "pressed.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tonalmathew/pressed.git"
+  },
+  "keywords": [
+    "pressed",
+    "javascript",
+    "keys"
+  ],
+  "author": "tonalmathew",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tonalmathew/pressed/issues"
+  },
+  "homepage": "https://github.com/tonalmathew/pressed#readme"
+}
