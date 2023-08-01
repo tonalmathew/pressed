@@ -6,7 +6,7 @@ const use = ({ preventDefault = true, upperCase = true, styles = {} }) => {
   Object.assign(newDiv.style, styles);
 
   document.body.addEventListener("keydown", event => {
-    console.log(event)
+    // console.log(event)
 
     const modifierKeys = [
       { key: 'ctrlKey', label: 'Control' },
@@ -18,10 +18,12 @@ const use = ({ preventDefault = true, upperCase = true, styles = {} }) => {
     const modifiersPressed = modifierKeys.filter(modifier => event[`${modifier.key}`]);
 
     if (event.key) {
-      const keys = modifiersPressed.length && modifiersPressed.map(modifier => modifier.label).join(' + ');
-      const message = keys ? modifiersPressed.length > 1 ? keys.split(' + ').includes(event.key) ? keys : `${keys} + ${event.key}` : event.key !== keys ? `${keys} + ${event.key}` : event.key : event.key;
       preventDefault && event.preventDefault();
-      newDiv.textContent = upperCase ? message.toUpperCase() : message
+      let message = []
+      const keys = modifiersPressed.length && modifiersPressed.map(modifier => modifier.label);
+      keys.length? keys.includes(event.key) ? message.push(...keys) : message.push(...keys, event.key) : message.push(event.key)
+      let msgString = message.join(' + ')
+      newDiv.textContent = upperCase ? msgString.toUpperCase() : msgString
       clearText()
     }
   })
@@ -38,4 +40,10 @@ const use = ({ preventDefault = true, upperCase = true, styles = {} }) => {
   }
 }
 
-export default use;
+// export default use;
+
+const pressed = {
+  use
+}
+
+export default pressed
