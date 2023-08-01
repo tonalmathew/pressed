@@ -7,9 +7,9 @@
 ### How to use
 
 ```js
-  import use from '@tonalmathew/pressed'
+  import pressed from '@tonalmathew/pressed'
 
-  use({
+  pressed.use({
     preventDefault: true, 
     upperCase: true, 
     styles: {
