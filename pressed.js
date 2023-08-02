@@ -33,8 +33,8 @@ const use = ({ preventDefault = true, upperCase = true, styles = {} }) => {
           ? message.push(...keys)
           : message.push(...keys, event.key === " " ? "Space" : event.key)
         : event.key === " "
-        ? message.push("Space")
-        : message.push(event.key);
+          ? message.push("Space")
+          : message.push(event.key);
       let msgString = message.join(" + ");
       newDiv.style.visibility = "visible";
       newDiv.textContent = upperCase ? msgString.toUpperCase() : msgString;
