@@ -1,7 +1,7 @@
 const use = ({ preventDefault = true, upperCase = true, styles = {} }) => {
   const newDiv = document.createElement('div');
   newDiv.setAttribute('id', 'pressed');
-  newDiv.setAttribute('style', 'position: fixed; bottom: 0; left: 0; margin: 10px; padding: 10px; border-radius: 10px; font-family: monospace;');
+  newDiv.setAttribute('style', 'position: fixed; bottom: 0; left: 0; margin: 10px; padding: 10px; border-radius: 10px; font-family: monospace; visibility: hidden');
 
   Object.assign(newDiv.style, styles);
 
@@ -18,6 +18,7 @@ const use = ({ preventDefault = true, upperCase = true, styles = {} }) => {
     const modifiersPressed = modifierKeys.filter(modifier => event[`${modifier.key}`]);
 
     if (event.key) {
+      newDiv.style.visibility = 'visible';
       preventDefault && event.preventDefault();
       let message = []
       const keys = modifiersPressed.length && modifiersPressed.map(modifier => modifier.label);
@@ -36,6 +37,7 @@ const use = ({ preventDefault = true, upperCase = true, styles = {} }) => {
     clearTimeout(timeoutId);
     timeoutId = setTimeout(() => {
       newDiv.textContent = '';
+      newDiv.style.visibility = 'hidden';
     }, 3000);
   }
 }
