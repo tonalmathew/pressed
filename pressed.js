@@ -1,7 +1,7 @@
 const use = ({ preventDefault = true, upperCase = true, styles = {} }) => {
   const newDiv = document.createElement('div');
   newDiv.setAttribute('id', 'pressed');
-  newDiv.setAttribute('style', 'position: fixed; bottom: 0; left: 0; margin: 10px; padding: 10px; border-radius: 10px; font-family: monospace;');
+  newDiv.setAttribute('style', 'position: fixed; bottom: 0; left: 0; margin: 10px; padding: 10px; border-radius: 10px; font-family: monospace; visibility: hidden');
 
   Object.assign(newDiv.style, styles);
 
@@ -21,8 +21,9 @@ const use = ({ preventDefault = true, upperCase = true, styles = {} }) => {
       preventDefault && event.preventDefault();
       let message = []
       const keys = modifiersPressed.length && modifiersPressed.map(modifier => modifier.label);
-      keys.length? keys.includes(event.key) ? message.push(...keys) : message.push(...keys, event.key) : message.push(event.key)
+      keys.length? keys.includes(event.key) ? message.push(...keys) : message.push(...keys, event.key) : event.key === ' '? message.push('Space') : message.push(event.key)
       let msgString = message.join(' + ')
+      newDiv.style.visibility = 'visible';
       newDiv.textContent = upperCase ? msgString.toUpperCase() : msgString
       clearText()
     }
@@ -35,6 +36,7 @@ const use = ({ preventDefault = true, upperCase = true, styles = {} }) => {
   const clearText = () => {
     clearTimeout(timeoutId);
     timeoutId = setTimeout(() => {
+      newDiv.style.visibility = 'hidden';
       newDiv.textContent = '';
     }, 3000);
   }
