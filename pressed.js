@@ -9,7 +9,6 @@ const use = ({ preventDefault = true, upperCase = true, styles = {} }) => {
   Object.assign(newDiv.style, styles);
 
   document.body.addEventListener("keydown", (event) => {
-    // console.log(event)
 
     const modifierKeys = [
       { key: "ctrlKey", label: "Control" },
@@ -30,12 +29,10 @@ const use = ({ preventDefault = true, upperCase = true, styles = {} }) => {
         modifiersPressed.map((modifier) => modifier.label);
       keys.length
         ? keys.includes(event.key)
-          ? message.push(...keys)
-          : message.push(...keys, event.key === " " ? "Space" : event.key)
-        : event.key === " "
-          ? message.push("Space")
-          : message.push(event.key);
-      let msgString = message.join(" + ");
+          ? insert(message, { keys })
+          : insert(message, { keys, evntKey: event.key })
+        : insert(message, { keys: '', evntKey: event.key })
+      let msgString = message.filter(msg => msg !== undefined).join(" + ");
       newDiv.style.visibility = "visible";
       newDiv.textContent = upperCase ? msgString.toUpperCase() : msgString;
       clearText();
@@ -55,10 +52,17 @@ const use = ({ preventDefault = true, upperCase = true, styles = {} }) => {
   };
 };
 
-// export default use;
+const insert = (msg, { keys, evntKey }) => {
+  console.log('msg', { keys, evntKey })
+  evntKey === ' ' ? evntKey = 'Space' : ''
+  return msg.push(...keys, evntKey)
+}
 
-const pressed = {
+// const modify = (keysToModify) => {
+//   return evntKey
+// }
+
+export default {
   use,
+  // modify
 };
-
-export default pressed;

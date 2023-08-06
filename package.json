@@ -1,6 +1,6 @@
 {
   "name": "@tonalmathew/pressed",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "display pressed keys",
   "main": "pressed.js",
   "scripts": {
@@ -20,5 +20,5 @@
   "bugs": {
     "url": "https://github.com/tonalmathew/pressed/issues"
   },
-  "homepage": "https://github.com/tonalmathew/pressed#readme"
+  "homepage": "https://tonalmathew.github.io/pressed"
 }
