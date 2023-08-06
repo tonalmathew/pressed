@@ -1,12 +1,19 @@
 const use = ({ preventDefault = true, upperCase = true, styles = {} }) => {
   const newDiv = document.createElement("div");
   newDiv.setAttribute("id", "pressed");
-  newDiv.setAttribute(
-    "style",
-    "position: fixed; bottom: 0; left: 0; margin: 10px; padding: 10px; border-radius: 10px; font-family: monospace; visibility: hidden"
-  );
+  Object.assign(newDiv.style, {
+    position: "fixed",
+    bottom: "0",
+    left: "0",
+    margin: "10px",
+    padding: "10px",
+    borderRadius: "10px",
+    fontFamily: "monospace",
+    visibility: "hidden",
+    ...styles,
+  })
 
-  Object.assign(newDiv.style, styles);
+  document.body.appendChild(newDiv);
 
   document.body.addEventListener("keydown", (event) => {
 
@@ -39,7 +46,6 @@ const use = ({ preventDefault = true, upperCase = true, styles = {} }) => {
     }
   });
 
-  document.body.appendChild(newDiv);
 
   let timeoutId;
 
@@ -53,16 +59,20 @@ const use = ({ preventDefault = true, upperCase = true, styles = {} }) => {
 };
 
 const insert = (msg, { keys, evntKey }) => {
-  console.log('msg', { keys, evntKey })
-  evntKey === ' ' ? evntKey = 'Space' : ''
-  return msg.push(...keys, evntKey)
+  const extractedKeys = Object.keys(itemsToModify[0])
+  const newKey = []
+  keys && keys.map((key) => (extractedKeys.includes(key) ? newKey.push(itemsToModify[0][key]) : newKey.push(key)));
+  extractedKeys.includes(evntKey) ? evntKey = itemsToModify[0][evntKey] : ''
+  return msg.push(...newKey, evntKey)
 }
 
-// const modify = (keysToModify) => {
-//   return evntKey
-// }
+var itemsToModify = []
+
+const modify = (keysToModify) => {
+  itemsToModify.push(keysToModify)
+}
 
 export default {
   use,
-  // modify
+  modify
 };

@@ -19,4 +19,6 @@
     }
   })
 
+  pressed.modify({'Control': 'Ctrl', 'Meta': 'Win', ' ': 'Space'})
+
 ```
